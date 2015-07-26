@@ -1,16 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="nytimesbooks">
+	<div class="row">
+		<h1> New York Times </h1>
+		<p class="lead">Book Best Sellers | Published on {{ date }} </p>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<p class="lead"> Non-fiction </p>
+			<ul>
+			{% for book in NFbooks %}
+				<li>
+					<p>{{ book.title }}</p>
+					<p>By {{ book.author }}</p>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
 
-<h1> New York Times </h1>
-<p class="lead"> Non-fiction | Published on {{ date }} </p>
-<ul>
-{% for book in books %}
-	<li>
-		<p>Title: {{ book.title }}</p>
-		<p>Author: {{ book.author }}</p>
-	</li>
-{% endfor %}
-</ul>
+		<div class="col-md-4">
+			<p class="lead"> Fiction </p>
+			<ul>
+				{% for book in Fbooks %}
+				<li>
+					<p>{{ book.title }}</p>
+					<p>By {{ book.author }}</p>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div class="col-md-4">
+			<p class="lead"> Advice How-To and Miscellaneous </p>
+			<ul>
+				{% for book in howToBooks %}
+				<li>
+					<p>{{ book.title }}</p>
+					<p>By {{ book.author }}</p>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+	</div>
+</div>
 
 {% endblock %}

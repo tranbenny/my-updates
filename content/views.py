@@ -10,10 +10,36 @@ def list(request):
 	info = titles.json()
 	results = info["results"]
 	listOfBestSellers = results["lists"] #array
-	allBooks = []
+	allNFBooks = []
+	allFBooks = []
+	howToBooks = []
 	for lists in listOfBestSellers: 
-		if (lists["list_name"] == "Combined Print and E-Book Nonfiction"):
-			allBooks = lists["books"]
-			break	
-	renderOptions = { 'books' : allBooks, 'date' : results["published_date"]}
+		if (lists["list_name"] == "Combined Print and E-Book Fiction"):
+			allFBooks = lists["books"]
+		elif (lists["list_name"] == "Combined Print and E-Book Nonfiction"):
+			allNFBooks = lists["books"]
+		elif (lists["list_name"] == "Advice How-To and Miscellaneous"):
+			howToBooks = lists["books"]
+			break
+	manipulateTitle(allNFBooks)	
+	manipulateTitle(allFBooks)
+	manipulateTitle(howToBooks)	
+	renderOptions = { 'NFbooks' : allNFBooks, 'Fbooks' : allFBooks, 'howToBooks' : howToBooks, 'date' : results["published_date"]}
 	return render(request, "content/update_list.html", renderOptions)
+
+
+def manipulateTitle(books):
+	# books is an array of dictionary objects
+	for book in books: 
+		title = book["title"]
+		if (not title.istitle()):
+			book["title"] = fixCapitals(title)
+
+def fixCapitals(title):
+	lowerCaseTitle = title.lower()
+	words = lowerCaseTitle.split()
+	result = ""
+	for word in words:
+		word = word.capitalize()
+		result += word + " "
+	return result.rstrip()
