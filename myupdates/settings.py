@@ -56,7 +56,7 @@ ROOT_URLCONF = 'myupdates.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,12 +76,14 @@ WSGI_APPLICATION = 'myupdates.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 import dj_database_url
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 DATABASES['default'] = dj_database_url.config()
 
 
@@ -106,6 +108,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    '/var/www/static/',
 )
 
 
