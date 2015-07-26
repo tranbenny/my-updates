@@ -1,4 +1,3 @@
 myenv
 *.pyc
 myupdates/ignore_directory
-static/libs
