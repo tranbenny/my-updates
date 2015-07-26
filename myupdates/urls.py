@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    url(r'^updates/', include('content.urls', namespace='updates')),
     url(r'^admin/', include(admin.site.urls)),
     url('^$', views.load_home),
 ]

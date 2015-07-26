@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> New York Times </h1>
+<p class="lead"> Non-fiction | Published on {{ date }} </p>
+<ul>
+{% for book in books %}
+	<li>
+		<p>Title: {{ book.title }}</p>
+		<p>Author: {{ book.author }}</p>
+	</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
