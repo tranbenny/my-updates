@@ -24,7 +24,14 @@ def list(request):
 	manipulateTitle(allNFBooks)	
 	manipulateTitle(allFBooks)
 	manipulateTitle(howToBooks)	
-	renderOptions = { 'NFbooks' : allNFBooks, 'Fbooks' : allFBooks, 'howToBooks' : howToBooks, 'date' : results["published_date"]}
+	weather = findWeather()
+	renderOptions = { 
+		'NFbooks' : allNFBooks, 
+		'Fbooks' : allFBooks, 
+		'howToBooks' : howToBooks, 
+		'date' : results["published_date"],
+		'weather' : weather
+	}
 	return render(request, "content/update_list.html", renderOptions)
 
 
@@ -43,3 +50,24 @@ def fixCapitals(title):
 		word = word.capitalize()
 		result += word + " "
 	return result.rstrip()
+
+def findWeather():
+	yahooWeatherAPI = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22seattle%2C%20wa%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
+	weather = requests.get(yahooWeatherAPI)
+	weatherInfo = weather.json()
+	weatherResults = weatherInfo["query"]["results"]
+	cityResult = weatherResults["channel"]
+	dayInfo = cityResult["item"]
+	return dayInfo["description"]
+	# return render(request, "content/weather.html")
+
+
+
+
+
+
+
+
+
+
+
