@@ -1,0 +1,22 @@
+{
+  "name": "myupdates",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tranbenny/my-updates",
+  "authors": [
+    "tranbenny <tran.benny123@gmail.com>"
+  ],
+  "description": "automating external libraries with bower",
+  "main": "manage.py",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}
